@@ -1,0 +1,28 @@
+Command line:
+   afifo_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  51759
+
+Sat Jul 02 15:41:30 2016
+
+
+ Elaboration Time: 0.109375 sec
+
+ Current Memory Usage: 847.958 Meg
+
+ Total Signals          : 36
+ Total Nets             : 59
+ Total Signal Drivers   : 17
+ Total Blocks           : 4
+ Total Primitive Blocks : 3
+ Total Processes        : 25
+ Total Traceable Variables  : 32
+ Total Scalar Nets and Variables : 390
+
+ Total Simulation Time: 0.171875 sec
+
+ Current Memory Usage: 1162.53 Meg
+
+Sat Jul 02 15:42:13 2016
+
