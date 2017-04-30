@@ -1,0 +1,3 @@
+verilog work "graycounter.v"
+verilog work "FIFOCODE.v"
+verilog work "afifo.v"

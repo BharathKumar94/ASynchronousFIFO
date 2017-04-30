@@ -1,0 +1,17 @@
+xst -intstyle ise -ifn "G:/MAIN PROJECT/P1/FIFO CODE/AFIFO/afifo.xst" -ofn "G:/MAIN PROJECT/P1/FIFO CODE/AFIFO/afifo.syr" 
+xst -intstyle ise -ifn "G:/MAIN PROJECT/P1/FIFO CODE/AFIFO/afifo.xst" -ofn "G:/MAIN PROJECT/P1/FIFO CODE/AFIFO/afifo.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc afifo.ucf -p xc3s500e-fg320-4 "afifo.ngc" afifo.ngd  
+map -intstyle ise -p xc3s500e-fg320-4 -cm area -ir off -pr off -c 100 -o afifo_map.ncd afifo.ngd afifo.pcf 
+xst -intstyle ise -ifn "G:/MAIN PROJECT/P1/FIFO CODE/AFIFO/afifo.xst" -ofn "G:/MAIN PROJECT/P1/FIFO CODE/AFIFO/afifo.syr" 
+xst -intstyle ise -ifn "G:/MAIN PROJECT/P1/FIFO CODE/AFIFO/afifo.xst" -ofn "G:/MAIN PROJECT/P1/FIFO CODE/AFIFO/afifo.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc afifo.ucf -p xc3s500e-fg320-4 "afifo.ngc" afifo.ngd  
+map -intstyle ise -p xc3s500e-fg320-4 -cm area -ir off -pr off -c 100 -o afifo_map.ncd afifo.ngd afifo.pcf 
+par -w -intstyle ise -ol high -t 1 afifo_map.ncd afifo.ncd afifo.pcf 
+trce -intstyle ise -v 3 -s 4 -n 3 -fastpaths -xml afifo.twx afifo.ncd -o afifo.twr afifo.pcf -ucf afifo.ucf 
+bitgen -intstyle ise -f afifo.ut afifo.ncd 
+xst -intstyle ise -ifn "G:/MAIN PROJECT/P1/FIFO CODE/AFIFO/afifo.xst" -ofn "G:/MAIN PROJECT/P1/FIFO CODE/AFIFO/afifo.syr" 
+xst -intstyle ise -ifn "G:/MAIN PROJECT/P1/FIFO/afifo.xst" -ofn "G:/MAIN PROJECT/P1/FIFO/afifo.syr" 
+xst -intstyle ise -ifn "G:/MAIN PROJECT/P1/FIFO O CODE/afifo.xst" -ofn "G:/MAIN PROJECT/P1/FIFO O CODE/afifo.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc afifo.ucf -p xc3s500e-fg320-4 "afifo.ngc" afifo.ngd  
+xst -intstyle ise -ifn "C:/Users/kbhar/Desktop/Asynch FIFO/FIFO O CODE/afifo.xst" -ofn "C:/Users/kbhar/Desktop/Asynch FIFO/FIFO O CODE/afifo.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc afifo.ucf -p xc3s500e-fg320-4 "afifo.ngc" afifo.ngd  

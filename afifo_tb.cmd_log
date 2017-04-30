@@ -1,0 +1,1 @@
+xst -intstyle ise -ifn "G:/MAIN PROJECT/P1/FIFO CODE/AFIFO/afifo_tb.xst" -ofn "G:/MAIN PROJECT/P1/FIFO CODE/AFIFO/afifo_tb.syr" 

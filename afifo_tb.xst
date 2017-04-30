@@ -1,0 +1,5 @@
+set -tmpdir "G:/MAIN PROJECT/P1/FIFO/xst/projnav.tmp"
+set -xsthdpdir "G:/MAIN PROJECT/P1/FIFO/xst"
+elaborate
+-ifn afifo_tb.prj
+-ifmt mixed

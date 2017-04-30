@@ -1,0 +1,521 @@
+Release 14.5 - xst P.58f (nt64)
+Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.37 secs
+ 
+--> Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.38 secs
+ 
+--> Reading design: afifo.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+	9.1) Device utilization summary
+	9.2) Partition Resource Summary
+	9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "afifo.prj"
+Input Format                       : mixed
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "afifo"
+Output Format                      : NGC
+Target Device                      : xc3s500e-4-fg320
+
+---- Source Options
+Top Module Name                    : afifo
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Mux Style                          : Auto
+Decoder Extraction                 : YES
+Priority Encoder Extraction        : Yes
+Shift Register Extraction          : YES
+Logical Shifter Extraction         : YES
+XOR Collapsing                     : YES
+ROM Style                          : Auto
+Mux Extraction                     : Yes
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Multiplier Style                   : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 24
+Register Duplication               : YES
+Slice Packing                      : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Yes
+Use Synchronous Set                : Yes
+Use Synchronous Reset              : Yes
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+Verilog 2001                       : YES
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling verilog file "graycounter.v" in library work
+Compiling verilog file "FIFOCODE.v" in library work
+Module <graycounter> compiled
+Module <afifo> compiled
+No errors in compilation
+Analysis of file <"afifo.prj"> succeeded.
+ 
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for module <afifo> in library <work> with parameters.
+	address_width = "00000000000000000000000000000100"
+	data_width = "00000000000000000000000000001000"
+	fifo_depth = "00000000000000000000000000001000"
+
+Analyzing hierarchy for module <graycounter> in library <work> with parameters.
+	counter_width = "00000000000000000000000000000100"
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing top module <afifo>.
+	address_width = 32'sb00000000000000000000000000000100
+	data_width = 32'sb00000000000000000000000000001000
+	fifo_depth = 32'sb00000000000000000000000000001000
+INFO:Xst:1433 - Contents of array <fifo> may be accessed with an index that exceeds the array size. This could cause simulation mismatch.
+INFO:Xst:1433 - Contents of array <fifo> may be accessed with an index that exceeds the array size. This could cause simulation mismatch.
+Module <afifo> is correct for synthesis.
+ 
+Analyzing module <graycounter> in library <work>.
+	counter_width = 32'sb00000000000000000000000000000100
+Module <graycounter> is correct for synthesis.
+ 
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <graycounter>.
+    Related source file is "graycounter.v".
+    Found 4-bit register for signal <gray_out>.
+    Found 4-bit up counter for signal <binary_count>.
+    Found 3-bit xor2 for signal <gray_out$xor0000> created at line 40.
+    Summary:
+	inferred   1 Counter(s).
+	inferred   4 D-type flip-flop(s).
+Unit <graycounter> synthesized.
+
+
+Synthesizing Unit <afifo>.
+    Related source file is "FIFOCODE.v".
+WARNING:Xst:1780 - Signal <w_addr> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <r_addr> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+    Found 8x8-bit dual-port RAM <Mram_fifo> for signal <fifo>.
+WARNING:Xst:737 - Found 1-bit latch for signal <status>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+    Found 1-bit register for signal <empty>.
+    Found 1-bit register for signal <full>.
+    Found 8-bit register for signal <r_data>.
+    Found 4-bit comparator equal for signal <equaladdress>.
+    Found 1-bit xor2 for signal <set_status$xor0000>.
+    Found 1-bit xor2 for signal <set_status$xor0001> created at line 72.
+    Summary:
+	inferred   1 RAM(s).
+	inferred  10 D-type flip-flop(s).
+	inferred   1 Comparator(s).
+Unit <afifo> synthesized.
+
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 1
+ 8x8-bit dual-port RAM                                 : 1
+# Counters                                             : 2
+ 4-bit up counter                                      : 2
+# Registers                                            : 5
+ 1-bit register                                        : 2
+ 4-bit register                                        : 2
+ 8-bit register                                        : 1
+# Latches                                              : 1
+ 1-bit latch                                           : 1
+# Comparators                                          : 1
+ 4-bit comparator equal                                : 1
+# Xors                                                 : 4
+ 1-bit xor2                                            : 2
+ 3-bit xor2                                            : 2
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+
+Synthesizing (advanced) Unit <afifo>.
+INFO:Xst:3231 - The small RAM <Mram_fifo> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 8-word x 8-bit                      |          |
+    |     clkA           | connected to signal <w_clk>         | rise     |
+    |     weA            | connected to signal <w_addr_en>     | high     |
+    |     addrA          | connected to signal <wptr>          |          |
+    |     diA            | connected to signal <w_data>        |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 8-word x 8-bit                      |          |
+    |     addrB          | connected to signal <rptr>          |          |
+    |     doB            | connected to internal node          |          |
+    -----------------------------------------------------------------------
+Unit <afifo> synthesized (advanced).
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 1
+ 8x8-bit dual-port distributed RAM                     : 1
+# Counters                                             : 2
+ 4-bit up counter                                      : 2
+# Registers                                            : 18
+ Flip-Flops                                            : 18
+# Latches                                              : 1
+ 1-bit latch                                           : 1
+# Comparators                                          : 1
+ 4-bit comparator equal                                : 1
+# Xors                                                 : 4
+ 1-bit xor2                                            : 2
+ 3-bit xor2                                            : 2
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+INFO:Xst:2261 - The FF/Latch <graycounter_prd/gray_out_0> in Unit <afifo> is equivalent to the following FF/Latch, which will be removed : <graycounter_prd/binary_count_1> 
+INFO:Xst:2261 - The FF/Latch <graycounter_pwr/gray_out_0> in Unit <afifo> is equivalent to the following FF/Latch, which will be removed : <graycounter_pwr/binary_count_1> 
+
+Optimizing unit <afifo> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block afifo, actual ratio is 0.
+FlipFlop empty has been replicated 1 time(s) to handle iob=true attribute.
+FlipFlop full has been replicated 1 time(s) to handle iob=true attribute.
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 26
+ Flip-Flops                                            : 26
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : afifo.ngr
+Top Level Output File Name         : afifo
+Output Format                      : NGC
+Optimization Goal                  : Speed
+Keep Hierarchy                     : No
+
+Design Statistics
+# IOs                              : 23
+
+Cell Usage :
+# BELS                             : 26
+#      GND                         : 1
+#      INV                         : 2
+#      LUT2                        : 9
+#      LUT3                        : 2
+#      LUT4                        : 8
+#      MUXF5                       : 3
+#      VCC                         : 1
+# FlipFlops/Latches                : 27
+#      FDE                         : 8
+#      FDP                         : 4
+#      FDRE                        : 12
+#      FDSE                        : 2
+#      LDC                         : 1
+# RAMS                             : 8
+#      RAM16X1D                    : 8
+# Clock Buffers                    : 2
+#      BUFGP                       : 2
+# IO Buffers                       : 21
+#      IBUF                        : 11
+#      OBUF                        : 10
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 3s500efg320-4 
+
+ Number of Slices:                       26  out of   4656     0%  
+ Number of Slice Flip Flops:             25  out of   9312     0%  
+ Number of 4 input LUTs:                 37  out of   9312     0%  
+    Number used as logic:                21
+    Number used as RAMs:                 16
+ Number of IOs:                          23
+ Number of bonded IOBs:                  23  out of    232     9%  
+    IOB Flip Flops:                       2
+ Number of GCLKs:                         2  out of     24     8%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+w_clk                              | BUFGP                  | 17    |
+r_clk                              | BUFGP                  | 17    |
+set_status(set_status1:O)          | NONE(*)(status)        | 1     |
+-----------------------------------+------------------------+-------+
+(*) This 1 clock signal(s) are generated by combinatorial logic,
+and XST is not able to identify which are the primary clock signals.
+Please use the CLOCK_SIGNAL constraint to specify the clock signal(s) generated by combinatorial logic.
+INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+
+Asynchronous Control Signals Information:
+----------------------------------------
+-----------------------------------+------------------------+-------+
+Control Signal                     | Buffer(FF name)        | Load  |
+-----------------------------------+------------------------+-------+
+presetempty(presetempty63_f5:O)    | NONE(empty)            | 2     |
+presetfull(presetfull60_f5:O)      | NONE(full)             | 2     |
+status_or0000(status_or0000_f5:O)  | NONE(status)           | 1     |
+-----------------------------------+------------------------+-------+
+
+Timing Summary:
+---------------
+Speed Grade: -4
+
+   Minimum period: 3.366ns (Maximum Frequency: 297.089MHz)
+   Minimum input arrival time before clock: 4.089ns
+   Maximum output required time after clock: 4.283ns
+   Maximum combinational path delay: No path found
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'r_clk'
+  Clock period: 3.366ns (frequency: 297.089MHz)
+  Total number of paths / destination ports: 54 / 30
+-------------------------------------------------------------------------
+Delay:               3.366ns (Levels of Logic = 1)
+  Source:            empty (FF)
+  Destination:       r_data_0 (FF)
+  Source Clock:      r_clk rising
+  Destination Clock: r_clk rising
+
+  Data Path: empty to r_data_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDP:C->Q              1   0.591   0.499  empty (empty_OBUF)
+     LUT2:I1->O           15   0.704   1.017  r_addr_en1 (r_addr_en)
+     FDE:CE                    0.555          r_data_0
+    ----------------------------------------
+    Total                      3.366ns (1.850ns logic, 1.516ns route)
+                                       (55.0% logic, 45.0% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'w_clk'
+  Clock period: 3.366ns (frequency: 297.089MHz)
+  Total number of paths / destination ports: 54 / 46
+-------------------------------------------------------------------------
+Delay:               3.366ns (Levels of Logic = 1)
+  Source:            full (FF)
+  Destination:       graycounter_pwr/gray_out_3 (FF)
+  Source Clock:      w_clk rising
+  Destination Clock: w_clk rising
+
+  Data Path: full to graycounter_pwr/gray_out_3
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDP:C->Q              1   0.591   0.499  full (full_OBUF)
+     LUT2:I1->O           15   0.704   1.017  w_addr_en1 (w_addr_en)
+     FDRE:CE                   0.555          graycounter_pwr/gray_out_0
+    ----------------------------------------
+    Total                      3.366ns (1.850ns logic, 1.516ns route)
+                                       (55.0% logic, 45.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'r_clk'
+  Total number of paths / destination ports: 22 / 22
+-------------------------------------------------------------------------
+Offset:              4.089ns (Levels of Logic = 2)
+  Source:            read_en (PAD)
+  Destination:       r_data_0 (FF)
+  Destination Clock: r_clk rising
+
+  Data Path: read_en to r_data_0
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             1   1.218   0.595  read_en_IBUF (read_en_IBUF)
+     LUT2:I0->O           15   0.704   1.017  r_addr_en1 (r_addr_en)
+     FDE:CE                    0.555          r_data_0
+    ----------------------------------------
+    Total                      4.089ns (2.477ns logic, 1.612ns route)
+                                       (60.6% logic, 39.4% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'w_clk'
+  Total number of paths / destination ports: 30 / 30
+-------------------------------------------------------------------------
+Offset:              4.089ns (Levels of Logic = 2)
+  Source:            write_en (PAD)
+  Destination:       graycounter_pwr/gray_out_3 (FF)
+  Destination Clock: w_clk rising
+
+  Data Path: write_en to graycounter_pwr/gray_out_3
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             1   1.218   0.595  write_en_IBUF (write_en_IBUF)
+     LUT2:I0->O           15   0.704   1.017  w_addr_en1 (w_addr_en)
+     FDRE:CE                   0.555          graycounter_pwr/gray_out_0
+    ----------------------------------------
+    Total                      4.089ns (2.477ns logic, 1.612ns route)
+                                       (60.6% logic, 39.4% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'r_clk'
+  Total number of paths / destination ports: 9 / 9
+-------------------------------------------------------------------------
+Offset:              4.283ns (Levels of Logic = 1)
+  Source:            empty_1 (FF)
+  Destination:       empty (PAD)
+  Source Clock:      r_clk rising
+
+  Data Path: empty_1 to empty
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDP:C->Q              1   0.591   0.420  empty_1 (empty_1)
+     OBUF:I->O                 3.272          empty_OBUF (empty)
+    ----------------------------------------
+    Total                      4.283ns (3.863ns logic, 0.420ns route)
+                                       (90.2% logic, 9.8% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'w_clk'
+  Total number of paths / destination ports: 1 / 1
+-------------------------------------------------------------------------
+Offset:              4.283ns (Levels of Logic = 1)
+  Source:            full_1 (FF)
+  Destination:       full (PAD)
+  Source Clock:      w_clk rising
+
+  Data Path: full_1 to full
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDP:C->Q              1   0.591   0.420  full_1 (full_1)
+     OBUF:I->O                 3.272          full_OBUF (full)
+    ----------------------------------------
+    Total                      4.283ns (3.863ns logic, 0.420ns route)
+                                       (90.2% logic, 9.8% route)
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 7.00 secs
+Total CPU time to Xst completion: 6.96 secs
+ 
+--> 
+
+Total memory usage is 307576 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    3 (   0 filtered)
+Number of infos    :    6 (   0 filtered)
+
